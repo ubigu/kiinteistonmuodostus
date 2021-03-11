@@ -13,3 +13,7 @@ INSERT INTO tonttijakosuunnitelman_elinkaaren_tila (koodi, arvo) VALUES
 INSERT INTO olotila (koodi, arvo) VALUES
     (1, 'Voimassaoleva'),
     (2, 'Lakannut');
+
+INSERT INTO suhde_peruskiinteistoon (koodi, arvo) VALUES
+    (101, 'Alapuolinen'),
+    (102, 'Yläpuolinen');

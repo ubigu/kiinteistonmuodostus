@@ -18,11 +18,12 @@ services:
       - POSTGRES_PASS=docker
       - ALLOW_IP_RANGE=0.0.0.0/0
       # if true, table initializations are run each time from /docker-entrypoint-initdb.d
+      # Warning: does not seem to work consistently. See README for updated instructions
       - IGNORE_INIT_HOOK_LOCKFILE=true
       # Add extensions you need to be enabled by default in the DB. Default are the three specified below
       - POSTGRES_MULTIPLE_EXTENSIONS=postgis
     ports:
       - 5432:5432
     restart: on-failure
-    healthcheck:
-      test: "exit 0"
+    #healthcheck:
+    #  test: "exit 0"

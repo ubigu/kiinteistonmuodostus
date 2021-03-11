@@ -35,23 +35,51 @@ CREATE TABLE olotila (
 
 ALTER TABLE olotila ADD CONSTRAINT olotila_koodi_kieli_unique UNIQUE (lang, koodi);
 
+COMMENT ON TABLE olotila IS 'Tonttijakosuunnitelman olotila';
+COMMENT ON COLUMN olotila.lang IS 'Koodin kieli.';
+COMMENT ON COLUMN olotila.koodi IS 'Olotilan koodi.';
+COMMENT ON COLUMN olotila.arvo IS 'Olotilan koodin selite.';
+
+CREATE TABLE suhde_peruskiinteistoon (
+    id SERIAL PRIMARY KEY,
+    lang CHAR(2) DEFAULT 'fi',
+    koodi INTEGER,
+    arvo CHARACTER VARYING(200)
+);
+
+ALTER TABLE suhde_peruskiinteistoon ADD CONSTRAINT suhde_peruskiinteistoon_koodi_kieli_unique UNIQUE (lang, koodi);
+
+COMMENT ON TABLE suhde_peruskiinteistoon IS 'Suhde peruskiinteistöön.';
+COMMENT ON COLUMN suhde_peruskiinteistoon.lang IS 'Koodin kieli.';
+COMMENT ON COLUMN suhde_peruskiinteistoon.koodi IS 'Suhteen koodi.';
+COMMENT ON COLUMN suhde_peruskiinteistoon.arvo IS 'Suhteen koodin selite.';
+
 CREATE TABLE tonttijakosuunnitelma (
     id BIGSERIAL PRIMARY KEY,
     tonttijakosuunnitelman_laji_id INTEGER NOT NULL,
     tunnus CHARACTER VARYING(100) NOT NULL,
     tonttijakosuunnitelman_elinkaaren_tila_id INTEGER NOT NULL,
-    olotila_id INTEGER
+    olotila_id INTEGER,
+    suhde_peruskiinteistoon_id INTEGER,
+    -- TODO: timestamp: UTC or with TZ?
+    vireilletuloaika TIMESTAMP WITHOUT TIME ZONE,
+    hyvaksymisaika TIMESTAMP WITHOUT TIME ZONE,
+    voimaantuloaika TIMESTAMP WITHOUT TIME ZONE,
+    kumottuaika TIMESTAMP WITHOUT TIME ZONE
 );
 
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_tonttijakosuunnitelman_laji_id_fk FOREIGN KEY (tonttijakosuunnitelman_laji_id) REFERENCES tonttijakosuunnitelman_laji (id);
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_tonttijakosuunnitelman_elinkaaren_tila_id_fk FOREIGN KEY (tonttijakosuunnitelman_elinkaaren_tila_id) REFERENCES tonttijakosuunnitelman_elinkaaren_tila (id);
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_olotila_id_fk FOREIGN KEY (olotila_id) REFERENCES olotila(id);
+ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_suhde_peruskiinteistoon_id_fk FOREIGN KEY (suhde_peruskiinteistoon_id) REFERENCES suhde_peruskiinteistoon(id);
 
 COMMENT ON TABLE tonttijakosuunnitelma IS 'Tonttijakosuunnitelma';
 COMMENT ON COLUMN tonttijakosuunnitelma.tonttijakosuunnitelman_laji_id IS 'Viittaus tonttijakosuunnitelman_laji -tauluun';
 COMMENT ON COLUMN tonttijakosuunnitelma.tunnus IS 'Tonttijakosuunnitelman tunnus';
 COMMENT ON COLUMN tonttijakosuunnitelma.tonttijakosuunnitelman_elinkaaren_tila_id IS 'Viittaus tonttjakosuunnitelman_elinkaaren_tila -tauluun.';
 COMMENT ON COLUMN tonttijakosuunnitelma.olotila_id IS 'Viittaus olotila -tauluun';
--- COMMENT ON COLUMN tonttijakosuunnitelma.
--- COMMENT ON COLUMN tonttijakosuunnitelma.
--- COMMENT ON COLUMN tonttijakosuunnitelma.
+COMMENT ON COLUMN tonttijakosuunnitelma.suhde_peruskiinteistoon_id IS 'Viittaus suhde_peruskiinteistoon -tauluun.';
+COMMENT ON COLUMN tonttijakosuunnitelma.vireilletuloaika IS 'Vireilletulon aika.';
+COMMENT ON COLUMN tonttijakosuunnitelma.hyvaksymisaika IS 'Hyväksymisaika.';
+COMMENT ON COLUMN tonttijakosuunnitelma.voimaantuloaika IS 'Voimaantulon aika.';
+COMMENT ON COLUMN tonttijakosuunnitelma.kumottuaika IS 'Aika jolloin kumottu.';
