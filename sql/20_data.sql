@@ -17,3 +17,20 @@ INSERT INTO olotila (koodi, arvo) VALUES
 INSERT INTO suhde_peruskiinteistoon (koodi, arvo) VALUES
     (101, 'Alapuolinen'),
     (102, 'Yläpuolinen');
+
+INSERT INTO rajamerkkityyppi (koodi, arvo) VALUES
+    (1, 'Tonttipyykki'),
+    (2, 'Yleisen alueen pyykki'),
+    (3, 'Maarekisteripyykki'),
+    (4, 'Rajapiste'),
+    (5, 'Tuntematon'),
+    (6, 'Rajaviitta'),
+    (7, 'Suuntapyykki'),
+    (8, 'Tiealueen paalu'),
+    (9, 'Esitonttirajamerkki');
+
+INSERT INTO asiakirjalaji (koodi, arvo) VALUES
+    (1, 'Rajamerkkiluettelo'),
+    (2, 'Laskupaperi'),
+    (3, 'Muodostusluettelo'),
+    (4, 'Tonttijakosuunnitelmakartta');
