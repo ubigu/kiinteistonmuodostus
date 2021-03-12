@@ -91,8 +91,8 @@ COMMENT ON COLUMN tonttijakosuunnitelma.kumottuaika IS 'Aika jolloin kumottu.';
 
 CREATE TABLE esitontti (
     id BIGSERIAL PRIMARY KEY,
+    tonttijakosuunnitelma_id BIGINT NOT NULL,
     esitontti_tunnus CHARACTER VARYING(100) NOT NULL,
-    -- kaavatunnus_id INTEGER,
     olotila_id INTEGER,
     suhde_peruskiinteistoon_id INTEGER,
     -- TODO: data types and units? m^2, m?
@@ -101,11 +101,13 @@ CREATE TABLE esitontti (
     ylin_korkeus FLOAT
 );
 
+ALTER TABLE esitontti ADD CONSTRAINT esitontti_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id) ON DELETE CASCADE;
 ALTER TABLE esitontti ADD CONSTRAINT esitontti_olotila_id_fk FOREIGN KEY (olotila_id) REFERENCES olotila(id);
 ALTER TABLE esitontti ADD CONSTRAINT esitontti_suhde_peruskiinteistoon_id_fk FOREIGN KEY (suhde_peruskiinteistoon_id) REFERENCES suhde_peruskiinteistoon(id);
 
 COMMENT ON TABLE esitontti IS 'Esitontti';
 COMMENT ON COLUMN esitontti.id IS 'Pääavain.';
+COMMENT ON COLUMN esitontti.tonttijakosuunnitelma_id IS 'Viittaus tonttijakosuunnitelma -tauluun.';
 COMMENT ON COLUMN esitontti.esitontti_tunnus IS 'Esitontin tunnus.';
 COMMENT ON COLUMN esitontti.olotila_id IS 'Viittaus olotila -tauluun';
 COMMENT ON COLUMN esitontti.suhde_peruskiinteistoon_id IS 'Viittaus suhde_peruskiinteistoon -tauluun.';
@@ -113,6 +115,36 @@ COMMENT ON COLUMN esitontti.projisoitu_ala IS 'Projisoitu ala, yksikkö m^2';
 COMMENT ON COLUMN esitontti.alin_korkeus IS 'Alin korkeus, yksikkö m';
 COMMENT ON COLUMN esitontti.ylin_korkeus IS 'Ylin korkeus, yksikkö m';
 
+CREATE TABLE kaavatunnus (
+    id BIGSERIAL PRIMARY KEY,
+    tunnus CHARACTER VARYING(100)
+);
+
+COMMENT ON TABLE kaavatunnus IS 'Kaavatunnus';
+COMMENT ON COLUMN kaavatunnus.id IS 'Pääavain';
+COMMENT ON COLUMN kaavatunnus.tunnus IS 'Kaavatunnus.';
+
+CREATE TABLE esitontti_kaavatunnus_join (
+    id BIGSERIAL PRIMARY KEY,
+    esitontti_id BIGINT NOT NULL, -- TODO: ON DELETE CASCADE?
+    kaavatunnus_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_esitontti_id_fk FOREIGN KEY (esitontti_id) REFERENCES esitontti(id);
+ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_kaavatunnus_id_fk FOREIGN KEY (kaavatunnus_id) REFERENCES kaavatunnus(id);
+
+COMMENT ON TABLE esitontti_kaavatunnus_join IS 'Esitontti - kaavatunnus. Monta-moneen liitostaulu.';
+COMMENT ON COLUMN esitontti_kaavatunnus_join.id IS 'Pääavain';
+COMMENT ON COLUMN esitontti_kaavatunnus_join.esitontti_id IS 'Vieraasvain esitontti-tauluun.';
+COMMENT ON COLUMN esitontti_kaavatunnus_join.kaavatunnus_id IS 'Vieraasvain kaavatunnus-tauluun.';
+
+CREATE TABLE esitontti_rajamerkki (
+    id BIGSERIAL PRIMARY KEY,
+    geom GEOMETRY(POINT, 3878) -- TODO: multipoint?
+);
+
+COMMENT ON TABLE esitontti_rajamerkki IS 'Esitontin rajamerkki';
+COMMENT ON COLUMN esitontti_rajamerkki.id IS 'Pääavain.';
+COMMENT ON COLUMN esitontti_rajamerkki.geom IS 'Rajamerkin geometria.';
 -- TODO:
 -- Muodostusluettelo -taulu?
--- kaavaTunnus -taulu?
