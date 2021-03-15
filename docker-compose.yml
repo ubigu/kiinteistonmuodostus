@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 volumes:
   postgis-data:
 
@@ -25,5 +25,13 @@ services:
     ports:
       - 5432:5432
     restart: on-failure
-    #healthcheck:
-    #  test: "exit 0"
+
+  schema_image:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./output:/output
+      - ./schemaspy.properties:/schemaspy.properties
+    environment:
+      WAIT_HOSTS: db:5432

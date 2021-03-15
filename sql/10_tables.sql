@@ -187,12 +187,14 @@ COMMENT ON COLUMN asiakirjalaji.lang IS 'Koodin kieli.';
 COMMENT ON COLUMN asiakirjalaji.koodi IS 'Asiakirjalajin koodi.';
 COMMENT ON COLUMN asiakirjalaji.arvo IS 'Asiakirjalajin koodin selite.';
 
-CREATE TABLE versioitu_objekti (
-    -- id BIGSERIAL PRIMARY KEY,
-    -- asiakirja_id INTEGER,
-    -- tonttijakosuunnitelma_id BIGINT,
-    -- esitontti_rajamerkki_id BIGINT,
-    -- esitontti_id BIGINT,
+CREATE TABLE asiakirja (
+    id SERIAL PRIMARY KEY,
+    tonttijakosuunnitelma_id BIGINT NOT NULL,
+    asiakirjatunnus CHARACTER VARYING(300),
+    asiakirjalaji_id INTEGER NOT NULL,
+    lisatietolinkki CHARACTER VARYING(300),
+    metatietolinkki CHARACTER VARYING(300),
+-- versioitu objekti
     identiteettitunnus CHARACTER VARYING(100),
     paikallinen_tunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
@@ -200,15 +202,6 @@ CREATE TABLE versioitu_objekti (
     luontiaika TIMESTAMP WITHOUT TIME ZONE,
     muokkausaika TIMESTAMP WITHOUT TIME ZONE
 );
-
-CREATE TABLE asiakirja (
-    id SERIAL PRIMARY KEY,
-    tonttijakosuunnitelma_id BIGINT NOT NULL,
-    asiakirjatunnus CHARACTER VARYING(300),
-    asiakirjalaji_id INTEGER NOT NULL,
-    lisatietolinkki CHARACTER VARYING(300),
-    metatietolinkki CHARACTER VARYING(300)
-) INHERITS (versioitu_objekti);
 
 ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id);
 ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_asiakirjalaji_id_fk FOREIGN KEY (asiakirjalaji_id) REFERENCES asiakirjalaji(id);
@@ -220,15 +213,6 @@ COMMENT ON COLUMN asiakirja.asiakirjatunnus IS 'Asiakirjatunnus.';
 COMMENT ON COLUMN asiakirja.asiakirjalaji_id IS 'Vierasavain asiakirjalaji -tauluun.';
 COMMENT ON COLUMN asiakirja.lisatietolinkki IS 'Lisätietolinkki.';
 COMMENT ON COLUMN asiakirja.metatietolinkki IS 'Metatietolinkki.';
-
-
-
--- ALTER TABLE versioitu_objekti ADD CONSTRAINT versioitu_objekti_asiakirja_id_fk FOREIGN KEY (asiakirja_id) REFERENCES asiakirja(id);
--- ALTER TABLE versioitu_objekti ADD CONSTRAINT versioitu_objekti_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id);
--- ALTER TABLE versioitu_objekti ADD CONSTRAINT versioitu_objekti_esitontti_rajamerkki_id_fk FOREIGN KEY (esitontti_rajamerkki_id) REFERENCES esitontti_rajamerkki(id);
--- ALTER TABLE versioitu_objekti ADD CONSTRAINT versioitu_objekti_esitontti_id_fk FOREIGN KEY (esitontti_id) REFERENCES esitontti(id);
-
-COMMENT ON TABLE versioitu_objekti IS 'Versioitu objekti.';
 
 -- TODO:
 -- Muodostusluettelo -taulu?

@@ -23,3 +23,18 @@ Komentorivipääsy tietokantaan onnistuu seuraavasti:
 ```
 [shell]$ PGPASSWORD=docker psql -U docker -h localhost tre_kiintmuod
 ```
+
+# Ajantasainen kannan skeemakuva
+
+Käynnistyksen yhteydessä luodaan myös kannan skeemakuva. Se löytyy sijainnista:
+*output/diagrams/summary/relationships.implied.large.png*
+## Kannan palvelimen osoitteen määritys *schemaspy.properites* -tiedostoon
+
+Koska kantaa pyöritetään dockerissa, pitää palvelimen osoite olla docker gatewayn osoite.
+
+Linuxissa osoitteen saa selville seuraavasti:
+```
+docker network inspect bridge --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}'
+```
+
+Tämä osoite pitää määrittää schemaspy.properties -tiedostoon, riville: *schemaspy.host=*
