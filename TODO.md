@@ -4,6 +4,7 @@ Tehtävien asioiden lista.
 
 ## Tietomalli
 * varmista vaihtelevan mittaisten merkkijonojen pituudet
+* uuid-muotoisten tunnisteiden käyttö pääavaimena?
 
 ## Tekniset
 
