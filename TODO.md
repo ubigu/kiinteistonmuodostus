@@ -1,6 +1,9 @@
 # TODO
 
-Tehtävien asioiden listaa.
+Tehtävien asioiden lista.
+
+## Tietomalli
+* varmista vaihtelevan mittaisten merkkijonojen pituudet
 
 ## Tekniset
 

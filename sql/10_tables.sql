@@ -221,11 +221,22 @@ CREATE TABLE esitontti_rajamerkki (
     esitontti_id BIGINT NOT NULL,
     rajamerkkityyppi_id INTEGER,
     pistenumero CHARACTER VARYING(100),
-    geom GEOMETRY(POINT, 3878)
+    geom GEOMETRY(POINT, 3878),
+-- versioitu objekti
+    korvattu_id BIGINT,
+    korvaava_id BIGINT,
+    identiteettitunnus CHARACTER VARYING(100),
+    paikallinen_tunnus CHARACTER VARYING(100),
+    laatija CHARACTER VARYING(100),
+    muokkaaja CHARACTER VARYING(100),
+    luontiaika TIMESTAMP WITHOUT TIME ZONE,
+    muokkausaika TIMESTAMP WITHOUT TIME ZONE
 );
 
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_id_fk FOREIGN KEY (esitontti_id) REFERENCES esitontti(id);
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_rajamerkkityyppi_id_fk FOREIGN KEY (rajamerkkityyppi_id) REFERENCES rajamerkkityyppi(id);
+ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_rajamerkki(id);
+ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES esitontti_rajamerkki(id);
 
 COMMENT ON TABLE esitontti_rajamerkki IS 'Esitontin rajamerkki';
 COMMENT ON COLUMN esitontti_rajamerkki.id IS 'Pääavain.';
@@ -233,6 +244,14 @@ COMMENT ON COLUMN esitontti_rajamerkki.esitontti_id IS 'Vierasavain esitontti -t
 COMMENT ON COLUMN esitontti_rajamerkki.rajamerkkityyppi_id IS 'Vierasavain rajamerkkityypi -tauluun.';
 COMMENT ON COLUMN esitontti_rajamerkki.pistenumero IS 'Rajamerkin pistenumero.';
 COMMENT ON COLUMN esitontti_rajamerkki.geom IS 'Rajamerkin geometria.';
+COMMENT ON COLUMN esitontti_rajamerkki.korvattu_id IS 'Korvattu objekti.';
+COMMENT ON COLUMN esitontti_rajamerkki.korvaava_id IS 'Korvaava objekti.';
+COMMENT ON COLUMN esitontti_rajamerkki.identiteettitunnus IS 'Identiteettitunnus.';
+COMMENT ON COLUMN esitontti_rajamerkki.paikallinen_tunnus IS 'Paikallinen tunnus.';
+COMMENT ON COLUMN esitontti_rajamerkki.laatija IS 'Laatijan tunniste.';
+COMMENT ON COLUMN esitontti_rajamerkki.muokkaaja IS 'Muokkaajan tunniste.';
+COMMENT ON COLUMN esitontti_rajamerkki.luontiaika IS 'Luontiaika.';
+COMMENT ON COLUMN esitontti_rajamerkki.muokkausaika IS 'Muokkausaika.';
 
 CREATE TABLE asiakirjalaji (
     id SERIAL PRIMARY KEY,
