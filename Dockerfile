@@ -23,7 +23,7 @@ LABEL JTDS_VERSION=$JTDS_VERSION
 LABEL GIT_BRANCH=$GIT_BRANCH
 LABEL GIT_REVISION=$GIT_REVISION
 
-ADD docker/open-sans.tar.gz /usr/share/fonts/
+COPY --from=builder /schemaspy/docker/open-sans.tar.gz /usr/share/fonts/
 
 ## Add the wait script to the image
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.8.0/wait /wait

@@ -3,6 +3,11 @@ Kiinteistönmuodostuksen tietomallit
 
 # Tietokantapalvelun käynnistäminen
 
+Ensimmäisellä kerralla käynnistettäessä aja build:
+```
+[shell]$ docker-compose build schema_image
+```
+
 Palvelu (PostgreSQL 12, PostGIS 3) käynnistetään docker-compose -komennolla:
 
 ```
