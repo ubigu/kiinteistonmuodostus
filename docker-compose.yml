@@ -9,8 +9,10 @@ services:
     volumes:
       - postgis-data:/var/lib/postgresql
       - ./sql/00_drop.sql:/docker-entrypoint-initdb.d/00_drop.sql
-      - ./sql/10_tables.sql:/docker-entrypoint-initdb.d/10_tables.sql
-      - ./sql/20_data.sql:/docker-entrypoint-initdb.d/20_data.sql
+      - ./sql/10_esitontti.sql:/docker-entrypoint-initdb.d/10_esitontti.sql
+#      - ./sql/12_kiinteisto.sql:/docker-entrypoint-initdb.d/12_kiinteisto.sql
+      - ./sql/20_data_esitontti.sql:/docker-entrypoint-initdb.d/20_data_esitontti.sql
+#      - ./sql/22_data_kiinteisto.sql:/docker-entrypoint-initdb.d/22_data_kiinteisto.sql
     environment:
       # If you need to create multiple database you can add coma separated databases eg gis,data
       - POSTGRES_DB=tre_kiintmuod

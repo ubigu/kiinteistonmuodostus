@@ -1,12 +1,14 @@
+# Virheet
+* versioiden hallinta: korvaa/korvattu 0..* (nyt 1:1)
+* esitontti-rajamerkki -liitos (sama rajamerkki voi kuulua useampaan esitonttiin)
+
 # TODO
 
-Tehtävien asioiden lista.
-
 ## Tietomalli
-* varmista vaihtelevan mittaisten merkkijonojen pituudet
+* varmista/yhtenäistä vaihtelevan mittaisten merkkijonojen pituudet
 * uuid-muotoisten tunnisteiden käyttö pääavaimena?
-
 ## Tekniset
 
 * kantapalvelun osoitteen konfigurointi (puoli)automaattisesti schemaspy.properites -tiedostoon
 * korjaa docker-compose s.e. palvelu ei lopettaessa päädy virheeseen (exit 137)
+* PostgreSQL uuid auto-increment (vrt), mahdollista?
