@@ -234,8 +234,8 @@ COMMENT ON COLUMN rajamerkkityyppi.arvo IS 'Rajamerkkityypin koodin selite.';
 
 CREATE TABLE esitontti_rajamerkki (
     id BIGSERIAL PRIMARY KEY,
-    esitontti_2d_id BIGINT NOT NULL,
-    esitontti_3d_id BIGINT NOT NULL,
+    esitontti_2d_id BIGINT,
+    esitontti_3d_id BIGINT,
     rajamerkkityyppi_id INTEGER,
     pistenumero CHARACTER VARYING(100),
     geom GEOMETRY(POINT, 3878),
@@ -248,9 +248,13 @@ CREATE TABLE esitontti_rajamerkki (
     muokkausaika TIMESTAMP WITHOUT TIME ZONE
 );
 
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_2d_rajamerkki_esitontti_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_3d_rajamerkki_esitontti_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
+ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_2d_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
+ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_3d_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_rajamerkkityyppi_id_fk FOREIGN KEY (rajamerkkityyppi_id) REFERENCES rajamerkkityyppi(id);
+ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_ref_mutually_exclusive CHECK (
+        (esitontti_2d_id IS NOT NULL AND esitontti_3d_id IS NULL)
+    OR  (esitontti_2d_id IS NULL AND esitontti_3d_id IS NOT NULL)
+    );
 
 -- COMMENT ON TABLE esitontti_rajamerkki IS 'Esitontin rajamerkki';
 -- COMMENT ON COLUMN esitontti_rajamerkki.id IS 'Pääavain.';
@@ -291,7 +295,7 @@ COMMENT ON COLUMN asiakirjalaji.arvo IS 'Asiakirjalajin koodin selite.';
 
 CREATE TABLE asiakirja (
     id SERIAL PRIMARY KEY,
-    tonttijakosuunnitelma_id BIGINT NOT NULL,
+    tonttijakosuunnitelma_id BIGINT,
     asiakirjatunnus CHARACTER VARYING(300),
     asiakirjalaji_id INTEGER NOT NULL,
     lisatietolinkki CHARACTER VARYING(300),
