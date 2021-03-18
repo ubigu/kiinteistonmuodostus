@@ -70,8 +70,6 @@ CREATE TABLE tonttijakosuunnitelma (
     voimaantuloaika TIMESTAMP WITHOUT TIME ZONE,
     kumottuaika TIMESTAMP WITHOUT TIME ZONE,
 -- versioitu objekti
-    korvattu_id BIGINT,
-    korvaava_id BIGINT,
     identiteettitunnus CHARACTER VARYING(100),
     paikallinen_tunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
@@ -84,8 +82,6 @@ ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_tonttijak
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_tonttijakosuunnitelman_elinkaaren_tila_id_fk FOREIGN KEY (tonttijakosuunnitelman_elinkaaren_tila_id) REFERENCES tonttijakosuunnitelman_elinkaaren_tila (id);
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_olotila_id_fk FOREIGN KEY (olotila_id) REFERENCES olotila(id);
 ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_suhde_peruskiinteistoon_id_fk FOREIGN KEY (suhde_peruskiinteistoon_id) REFERENCES suhde_peruskiinteistoon(id);
-ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES tonttijakosuunnitelma(id);
-ALTER TABLE tonttijakosuunnitelma ADD CONSTRAINT tonttijakosuunnitelma_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES tonttijakosuunnitelma(id);
 
 COMMENT ON TABLE tonttijakosuunnitelma IS 'Tonttijakosuunnitelma';
 COMMENT ON COLUMN tonttijakosuunnitelma.id IS 'Pääavain.';
@@ -98,14 +94,21 @@ COMMENT ON COLUMN tonttijakosuunnitelma.vireilletuloaika IS 'Vireilletulon aika.
 COMMENT ON COLUMN tonttijakosuunnitelma.hyvaksymisaika IS 'Hyväksymisaika.';
 COMMENT ON COLUMN tonttijakosuunnitelma.voimaantuloaika IS 'Voimaantulon aika.';
 COMMENT ON COLUMN tonttijakosuunnitelma.kumottuaika IS 'Aika jolloin kumottu.';
-COMMENT ON COLUMN tonttijakosuunnitelma.korvattu_id IS 'Korvattu objekti.';
-COMMENT ON COLUMN tonttijakosuunnitelma.korvaava_id IS 'Korvaava objekti.';
 COMMENT ON COLUMN tonttijakosuunnitelma.identiteettitunnus IS 'Identiteettitunnus.';
 COMMENT ON COLUMN tonttijakosuunnitelma.paikallinen_tunnus IS 'Paikallinen tunnus.';
 COMMENT ON COLUMN tonttijakosuunnitelma.laatija IS 'Laatijan tunniste.';
 COMMENT ON COLUMN tonttijakosuunnitelma.muokkaaja IS 'Muokkaajan tunniste.';
 COMMENT ON COLUMN tonttijakosuunnitelma.luontiaika IS 'Luontiaika.';
 COMMENT ON COLUMN tonttijakosuunnitelma.muokkausaika IS 'Muokkausaika.';
+
+CREATE TABLE tonttijakosuunnitelma_versio (
+    id BIGSERIAL PRIMARY KEY,
+    korvaaja_id BIGINT NOT NULL,
+    korvattu_id BIGINT NOT NULL
+);
+
+ALTER TABLE tonttijakosuunnitelma_versio ADD CONSTRAINT tonttijakosuunnitelma_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES tonttijakosuunnitelma(id);
+ALTER TABLE tonttijakosuunnitelma_versio ADD CONSTRAINT tonttijakosuunnitelma_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES tonttijakosuunnitelma(id);
 
 CREATE TABLE esitontti_2d (
     id BIGSERIAL PRIMARY KEY,
@@ -114,8 +117,6 @@ CREATE TABLE esitontti_2d (
     olotila_id INTEGER,
     pinta_ala DOUBLE PRECISION,
 -- versioitu objekti
-    korvattu_id BIGINT,
-    korvaava_id BIGINT,
     identiteettitunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
     muokkaaja CHARACTER VARYING(100),
@@ -126,8 +127,15 @@ CREATE TABLE esitontti_2d (
 
 ALTER TABLE esitontti_2d ADD CONSTRAINT esitontti_2d_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id) ON DELETE CASCADE;
 ALTER TABLE esitontti_2d ADD CONSTRAINT esitontti_2d_olotila_id_fk FOREIGN KEY (olotila_id) REFERENCES olotila(id);
-ALTER TABLE esitontti_2d ADD CONSTRAINT esitontti_2d_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_2d(id);
-ALTER TABLE esitontti_2d ADD CONSTRAINT esitontti_2d_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES esitontti_2d(id);
+
+CREATE TABLE esitontti_2d_versio (
+    id BIGSERIAL PRIMARY KEY,
+    korvaaja_id BIGINT NOT NULL,
+    korvattu_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_2d_versio ADD CONSTRAINT esitontti_2d_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES esitontti_2d(id);
+ALTER TABLE esitontti_2d_versio ADD CONSTRAINT esitontti_2d_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_2d(id);
 
 CREATE TABLE esitontti_3d (
     id BIGSERIAL PRIMARY KEY,
@@ -140,8 +148,6 @@ CREATE TABLE esitontti_3d (
     alin_korkeus FLOAT,
     ylin_korkeus FLOAT,
 -- versioitu objekti
-    korvattu_id BIGINT,
-    korvaava_id BIGINT,
     identiteettitunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
     muokkaaja CHARACTER VARYING(100),
@@ -153,8 +159,6 @@ CREATE TABLE esitontti_3d (
 ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id) ON DELETE CASCADE;
 ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_olotila_id_fk FOREIGN KEY (olotila_id) REFERENCES olotila(id);
 ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_suhde_peruskiinteistoon_id_fk FOREIGN KEY (suhde_peruskiinteistoon_id) REFERENCES suhde_peruskiinteistoon(id);
-ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_3d(id);
-ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES esitontti_3d(id);
 
 -- COMMENT ON TABLE esitontti IS 'Esitontti';
 -- COMMENT ON COLUMN esitontti.id IS 'Pääavain.';
@@ -165,14 +169,21 @@ ALTER TABLE esitontti_3d ADD CONSTRAINT esitontti_3d_korvaava_id_fk FOREIGN KEY 
 -- COMMENT ON COLUMN esitontti.projisoitu_ala IS 'Projisoitu ala, yksikkö m^2';
 -- COMMENT ON COLUMN esitontti.alin_korkeus IS 'Alin korkeus, yksikkö m';
 -- COMMENT ON COLUMN esitontti.ylin_korkeus IS 'Ylin korkeus, yksikkö m';
--- COMMENT ON COLUMN esitontti.korvattu_id IS 'Korvattu objekti.';
--- COMMENT ON COLUMN esitontti.korvaava_id IS 'Korvaava objekti.';
 -- COMMENT ON COLUMN esitontti.identiteettitunnus IS 'Identiteettitunnus.';
 -- COMMENT ON COLUMN esitontti.paikallinen_tunnus IS 'Paikallinen tunnus.';
 -- COMMENT ON COLUMN esitontti.laatija IS 'Laatijan tunniste.';
 -- COMMENT ON COLUMN esitontti.muokkaaja IS 'Muokkaajan tunniste.';
 -- COMMENT ON COLUMN esitontti.luontiaika IS 'Luontiaika.';
 -- COMMENT ON COLUMN esitontti.muokkausaika IS 'Muokkausaika.';
+
+CREATE TABLE esitontti_3d_versio (
+    id BIGSERIAL PRIMARY KEY,
+    korvaaja_id BIGINT NOT NULL,
+    korvattu_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_3d_versio ADD CONSTRAINT esitontti_3d_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES esitontti_3d(id);
+ALTER TABLE esitontti_3d_versio ADD CONSTRAINT esitontti_3d_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_3d(id);
 
 CREATE TABLE kaavatunnus (
     id BIGSERIAL PRIMARY KEY,
@@ -183,20 +194,23 @@ COMMENT ON TABLE kaavatunnus IS 'Kaavatunnus';
 COMMENT ON COLUMN kaavatunnus.id IS 'Pääavain';
 COMMENT ON COLUMN kaavatunnus.tunnus IS 'Kaavatunnus.';
 
-CREATE TABLE esitontti_kaavatunnus_join (
+CREATE TABLE esitontti_2d_kaavatunnus_join (
     id BIGSERIAL PRIMARY KEY,
-    esitontti_2d_id BIGINT,
-    esitontti_3d_id BIGINT,
+    esitontti_2d_id BIGINT NOT NULL,
     kaavatunnus_id BIGINT NOT NULL
 );
 
-ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_esitontti_2d_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
-ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_esitontti_3d_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
-ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_kaavatunnus_id_fk FOREIGN KEY (kaavatunnus_id) REFERENCES kaavatunnus(id);
-ALTER TABLE esitontti_kaavatunnus_join ADD CONSTRAINT esitontti_kaavatunnus_join_esitontti_xd_ref_mutually_exclusive CHECK (
-        (esitontti_2d_id IS NOT NULL AND esitontti_3d_id IS NULL)
-    OR  (esitontti_2d_id IS NULL AND esitontti_3d_id IS NOT NULL)
-    );
+ALTER TABLE esitontti_2d_kaavatunnus_join ADD CONSTRAINT esitontti_2d_kaavatunnus_join_esitontti_2d_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
+ALTER TABLE esitontti_2d_kaavatunnus_join ADD CONSTRAINT esitontti_2d_kaavatunnus_join_kaavatunnus_id_fk FOREIGN KEY (kaavatunnus_id) REFERENCES kaavatunnus(id);
+
+CREATE TABLE esitontti_3d_kaavatunnus_join (
+    id BIGSERIAL PRIMARY KEY,
+    esitontti_3d_id BIGINT NOT NULL,
+    kaavatunnus_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_3d_kaavatunnus_join ADD CONSTRAINT esitontti_3d_kaavatunnus_join_esitontti_3d_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
+ALTER TABLE esitontti_3d_kaavatunnus_join ADD CONSTRAINT esitontti_3d_kaavatunnus_join_kaavatunnus_id_fk FOREIGN KEY (kaavatunnus_id) REFERENCES kaavatunnus(id);
 
 -- COMMENT ON TABLE esitontti_kaavatunnus_join IS 'Esitontti - kaavatunnus. Monta-moneen liitostaulu.';
 -- COMMENT ON COLUMN esitontti_kaavatunnus_join.id IS 'Pääavain';
@@ -226,8 +240,6 @@ CREATE TABLE esitontti_rajamerkki (
     pistenumero CHARACTER VARYING(100),
     geom GEOMETRY(POINT, 3878),
 -- versioitu objekti
-    korvattu_id BIGINT,
-    korvaava_id BIGINT,
     identiteettitunnus CHARACTER VARYING(100),
     paikallinen_tunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
@@ -239,8 +251,6 @@ CREATE TABLE esitontti_rajamerkki (
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_2d_rajamerkki_esitontti_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_3d_rajamerkki_esitontti_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_rajamerkkityyppi_id_fk FOREIGN KEY (rajamerkkityyppi_id) REFERENCES rajamerkkityyppi(id);
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_rajamerkki(id);
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES esitontti_rajamerkki(id);
 
 -- COMMENT ON TABLE esitontti_rajamerkki IS 'Esitontin rajamerkki';
 -- COMMENT ON COLUMN esitontti_rajamerkki.id IS 'Pääavain.';
@@ -248,14 +258,21 @@ ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_korvaava_id
 -- COMMENT ON COLUMN esitontti_rajamerkki.rajamerkkityyppi_id IS 'Vierasavain rajamerkkityypi -tauluun.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.pistenumero IS 'Rajamerkin pistenumero.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.geom IS 'Rajamerkin geometria.';
--- COMMENT ON COLUMN esitontti_rajamerkki.korvattu_id IS 'Korvattu objekti.';
--- COMMENT ON COLUMN esitontti_rajamerkki.korvaava_id IS 'Korvaava objekti.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.identiteettitunnus IS 'Identiteettitunnus.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.paikallinen_tunnus IS 'Paikallinen tunnus.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.laatija IS 'Laatijan tunniste.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.muokkaaja IS 'Muokkaajan tunniste.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.luontiaika IS 'Luontiaika.';
 -- COMMENT ON COLUMN esitontti_rajamerkki.muokkausaika IS 'Muokkausaika.';
+
+CREATE TABLE esitontti_rajamerkki_versio (
+    id BIGSERIAL PRIMARY KEY,
+    korvaaja_id BIGINT NOT NULL,
+    korvattu_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_rajamerkki_versio ADD CONSTRAINT esitontti_rajamerkki_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES esitontti_rajamerkki(id);
+ALTER TABLE esitontti_rajamerkki_versio ADD CONSTRAINT esitontti_rajamerkki_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_rajamerkki(id);
 
 CREATE TABLE asiakirjalaji (
     id SERIAL PRIMARY KEY,
@@ -280,8 +297,6 @@ CREATE TABLE asiakirja (
     lisatietolinkki CHARACTER VARYING(300),
     metatietolinkki CHARACTER VARYING(300),
 -- versioitu objekti
-    korvattu_id INTEGER,
-    korvaava_id INTEGER,
     identiteettitunnus CHARACTER VARYING(100),
     paikallinen_tunnus CHARACTER VARYING(100),
     laatija CHARACTER VARYING(100),
@@ -292,8 +307,6 @@ CREATE TABLE asiakirja (
 
 ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_tonttijakosuunnitelma_id_fk FOREIGN KEY (tonttijakosuunnitelma_id) REFERENCES tonttijakosuunnitelma(id);
 ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_asiakirjalaji_id_fk FOREIGN KEY (asiakirjalaji_id) REFERENCES asiakirjalaji(id);
-ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES asiakirja(id);
-ALTER TABLE asiakirja ADD CONSTRAINT asiakirja_korvaava_id_fk FOREIGN KEY (korvaava_id) REFERENCES asiakirja(id);
 
 COMMENT ON TABLE asiakirja IS 'Asiakirja.';
 COMMENT ON COLUMN asiakirja.id IS 'Pääavain.';
@@ -302,11 +315,18 @@ COMMENT ON COLUMN asiakirja.asiakirjatunnus IS 'Asiakirjatunnus.';
 COMMENT ON COLUMN asiakirja.asiakirjalaji_id IS 'Vierasavain asiakirjalaji -tauluun.';
 COMMENT ON COLUMN asiakirja.lisatietolinkki IS 'Lisätietolinkki.';
 COMMENT ON COLUMN asiakirja.metatietolinkki IS 'Metatietolinkki.';
-COMMENT ON COLUMN asiakirja.korvattu_id IS 'Korvattu objekti.';
-COMMENT ON COLUMN asiakirja.korvaava_id IS 'Korvaava objekti.';
 COMMENT ON COLUMN asiakirja.identiteettitunnus IS 'Identiteettitunnus.';
 COMMENT ON COLUMN asiakirja.paikallinen_tunnus IS 'Paikallinen tunnus.';
 COMMENT ON COLUMN asiakirja.laatija IS 'Laatijan tunniste.';
 COMMENT ON COLUMN asiakirja.muokkaaja IS 'Muokkaajan tunniste.';
 COMMENT ON COLUMN asiakirja.luontiaika IS 'Luontiaika.';
 COMMENT ON COLUMN asiakirja.muokkausaika IS 'Muokkausaika.';
+
+CREATE TABLE asiakirja_versio (
+    id BIGSERIAL PRIMARY KEY,
+    korvaaja_id BIGINT NOT NULL,
+    korvattu_id BIGINT NOT NULL
+);
+
+ALTER TABLE asiakirja_versio ADD CONSTRAINT asiakirja_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES asiakirja(id);
+ALTER TABLE asiakirja_versio ADD CONSTRAINT asiakirja_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES asiakirja(id);

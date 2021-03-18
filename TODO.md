@@ -1,5 +1,4 @@
 # Virheet
-* versioiden hallinta: korvaa/korvattu 0..* (nyt 1:1)
 * esitontti-rajamerkki -liitos (sama rajamerkki voi kuulua useampaan esitonttiin)
 
 # TODO
