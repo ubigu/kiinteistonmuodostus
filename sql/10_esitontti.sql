@@ -234,8 +234,6 @@ COMMENT ON COLUMN rajamerkkityyppi.arvo IS 'Rajamerkkityypin koodin selite.';
 
 CREATE TABLE esitontti_rajamerkki (
     id BIGSERIAL PRIMARY KEY,
-    esitontti_2d_id BIGINT,
-    esitontti_3d_id BIGINT,
     rajamerkkityyppi_id INTEGER,
     pistenumero CHARACTER VARYING(100),
     geom GEOMETRY(POINT, 3878),
@@ -248,13 +246,7 @@ CREATE TABLE esitontti_rajamerkki (
     muokkausaika TIMESTAMP WITHOUT TIME ZONE
 );
 
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_2d_id_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_3d_id_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
 ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_rajamerkkityyppi_id_fk FOREIGN KEY (rajamerkkityyppi_id) REFERENCES rajamerkkityyppi(id);
-ALTER TABLE esitontti_rajamerkki ADD CONSTRAINT esitontti_rajamerkki_esitontti_ref_mutually_exclusive CHECK (
-        (esitontti_2d_id IS NOT NULL AND esitontti_3d_id IS NULL)
-    OR  (esitontti_2d_id IS NULL AND esitontti_3d_id IS NOT NULL)
-    );
 
 -- COMMENT ON TABLE esitontti_rajamerkki IS 'Esitontin rajamerkki';
 -- COMMENT ON COLUMN esitontti_rajamerkki.id IS 'Pääavain.';
@@ -277,6 +269,24 @@ CREATE TABLE esitontti_rajamerkki_versio (
 
 ALTER TABLE esitontti_rajamerkki_versio ADD CONSTRAINT esitontti_rajamerkki_versio_korvaaja_id_fk FOREIGN KEY (korvaaja_id) REFERENCES esitontti_rajamerkki(id);
 ALTER TABLE esitontti_rajamerkki_versio ADD CONSTRAINT esitontti_rajamerkki_versio_korvattu_id_fk FOREIGN KEY (korvattu_id) REFERENCES esitontti_rajamerkki(id);
+
+CREATE TABLE esitontti_rajamerkki_esitontti_2d_join (
+    id BIGSERIAL PRIMARY KEY,
+    esitontti_rajamerkki_id BIGINT NOT NULL,
+    esitontti_2d_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_rajamerkki_esitontti_2d_join ADD CONSTRAINT esitontti_rajamerkki_esitontti_2d_join_1_fk FOREIGN KEY (esitontti_rajamerkki_id) REFERENCES esitontti_rajamerkki(id);
+ALTER TABLE esitontti_rajamerkki_esitontti_2d_join ADD CONSTRAINT esitontti_rajamerkki_esitontti_2d_join_2_fk FOREIGN KEY (esitontti_2d_id) REFERENCES esitontti_2d(id);
+
+CREATE TABLE esitontti_rajamerkki_esitontti_3d_join (
+    id BIGSERIAL PRIMARY KEY,
+    esitontti_rajamerkki_id BIGINT NOT NULL,
+    esitontti_3d_id BIGINT NOT NULL
+);
+
+ALTER TABLE esitontti_rajamerkki_esitontti_3d_join ADD CONSTRAINT esitontti_rajamerkki_esitontti_3d_join_1_fk FOREIGN KEY (esitontti_rajamerkki_id) REFERENCES esitontti_rajamerkki(id);
+ALTER TABLE esitontti_rajamerkki_esitontti_3d_join ADD CONSTRAINT esitontti_rajamerkki_esitontti_3d_join_2_fk FOREIGN KEY (esitontti_3d_id) REFERENCES esitontti_3d(id);
 
 CREATE TABLE asiakirjalaji (
     id SERIAL PRIMARY KEY,
