@@ -182,7 +182,7 @@ COMMENT ON COLUMN esitontti_3d.muokkausaika IS 'Muokkausaika.';
 CREATE TABLE muodostusluettelo (
     id BIGSERIAL PRIMARY KEY,
     kiinteistotunnus CHARACTER VARYING(100),
-    pinta_ala DOUBLE PRECISION,
+    pinta_ala DOUBLE PRECISION NOT NULL,
     esitontti_2d_id UUID,
     esitontti_3d_id UUID
 );

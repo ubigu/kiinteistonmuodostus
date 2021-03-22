@@ -1,10 +1,4 @@
 -- Kiinteistö
-CREATE TABLE muodostusluettelo (
-    id BIGSERIAL PRIMARY KEY,
-    kiinteistotunnus CHARACTER VARYING(100) NOT NULL,
-    pinta_ala DOUBLE PRECISION NOT NULL
-);
-
 CREATE TABLE rekisteriyksikkolaji (
     id SERIAL PRIMARY KEY,
     lang CHAR(2) DEFAULT 'fi',
