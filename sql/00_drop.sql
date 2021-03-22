@@ -1,5 +1,9 @@
 DROP TABLE IF EXISTS esitontti_rajamerkki_versio;
+DROP TABLE IF EXISTS esitontti_rajamerkki_esitontti_2d_join;
+DROP TABLE IF EXISTS esitontti_rajamerkki_esitontti_3d_join;
 DROP TABLE IF EXISTS esitontti_rajamerkki;
+DROP TABLE IF EXISTS rajamerkkityyppi;
+DROP TABLE IF EXISTS muodostusluettelo;
 DROP TABLE IF EXISTS esitontti_2d_kaavatunnus_join;
 DROP TABLE IF EXISTS esitontti_2d_versio;
 DROP TABLE IF EXISTS esitontti_2d;
@@ -20,4 +24,3 @@ DROP TABLE IF EXISTS olotila;
 DROP TABLE IF EXISTS suhde_peruskiinteistoon;
 
 DROP TABLE IF EXISTS kaavatunnus;
-DROP TABLE IF EXISTS rajamerkkityyppi;
