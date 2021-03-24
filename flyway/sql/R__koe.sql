@@ -1,0 +1,1 @@
+CREATE OR REPLACE VIEW test_fw2 AS SELECT * FROM test_flyway2;

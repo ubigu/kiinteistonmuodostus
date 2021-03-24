@@ -37,3 +37,12 @@ services:
       - ./schemaspy.properties:/schemaspy.properties
     environment:
       WAIT_HOSTS: db:5432
+
+  flyway:
+    image: flyway/flyway
+    command: -baselineOnMigrate="true" migrate -X -outputType=json
+    volumes:
+      - ./flyway/sql:/flyway/sql
+      - ./flyway/flyway.conf:/flyway/flyway.conf
+    depends_on:
+      - db
