@@ -4,12 +4,12 @@ INSERT INTO tonttijakosuunnitelman_laji (koodi, arvo) VALUES
     (3004, 'Sitova kolmiulotteinen tonttijako');
 
 INSERT INTO tonttijakosuunnitelman_elinkaaren_tila (koodi, arvo) VALUES
-    (1, 'Luonnos'),
-    (2, 'Vireillä oleva tonttijakosuunnitelma'),
-    (3, 'Hyväksytty tonttijakosuunnitelma'),
-    (4, 'Kumottu'),
-    (5, 'Rauennut'),
-    (6, 'Kumottu osittain');
+    (0, 'Luonnos'),
+    (1, 'Vireillä'),
+    (2, 'Voimassa'),
+    (3, 'Kumottu osittain'),
+    (4, 'Kumottu kokonaan'),
+    (5, 'Rauennut');
 
 INSERT INTO olotila (koodi, arvo) VALUES
     (1, 'Voimassaoleva'),
