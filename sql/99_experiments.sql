@@ -28,3 +28,14 @@ SELECT * FROM test_timestamps;
 -- Note also, that it is not needed to know, if daylight savings time is effective
 SELECT TIMEZONE('Europe/Helsinki', t_tz) FROM test_timestamps;
 SELECT TIMEZONE('Europe/Stockholm', t_tz) FROM test_timestamps;
+
+-- test automatic insert of database user name
+CREATE TABLE auto_user_test (
+    id SERIAL PRIMARY KEY,
+    my_value INTEGER,
+    created CHARACTER VARYING(100) DEFAULT user
+);
+
+INSERT INTO auto_user_test (my_value) VALUES
+    (10),
+    (11);

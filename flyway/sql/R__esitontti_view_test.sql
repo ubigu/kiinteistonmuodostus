@@ -1,0 +1,1 @@
+CREATE OR REPLACE VIEW esitontti_view_test AS SELECT id, esitontti_tunnus FROM esitontti;
