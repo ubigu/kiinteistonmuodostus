@@ -144,7 +144,7 @@ COMMENT ON COLUMN esitontti.muokkausaika IS 'Muokkausaika.';
 CREATE TABLE esitontti_geometria (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     esitontti_id UUID NOT NULL,
-    geom_2d GEOMETRY(MULTILINESTRING, 3878),
+    geom_2d GEOMETRY(MULTIPOLYGON, 3878),
     geom_3d GEOMETRY(POLYHEDRALSURFACE, 3878)
 );
 
