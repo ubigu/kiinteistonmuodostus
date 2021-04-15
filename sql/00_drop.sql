@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS esitontti_view_test;
+
 DROP TABLE IF EXISTS esitontti_rajamerkki_versio;
 DROP TABLE IF EXISTS esitontti_rajamerkki_esitontti_join;
 DROP TABLE IF EXISTS esitontti_rajamerkki;

@@ -46,3 +46,12 @@ services:
       - ./flyway/flyway.conf:/flyway/flyway.conf
     depends_on:
       - db
+
+  flyway_info:
+    image: flyway/flyway
+    command: info
+    volumes:
+      - ./flyway/sql:/flyway/sql
+      - ./flyway/flyway.conf:/flyway/flyway.conf
+    depends_on:
+      - db
