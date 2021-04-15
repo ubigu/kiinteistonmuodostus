@@ -69,7 +69,10 @@ docker-compose up flyway_info
 ```
 Migraatioiden ajon docker-image ajamalla voi suorittaa seuraavasti
 ```
-docker run --rm -v /home/esa/work/projects/kiinteistonmuodostus/flyway/sql:/flyway/sql flyway/flyway -url=jdbc:postgresql://172.17.0.1:5432/tre_kiintmuod -schemas=public -user=<user> -password=<password> -locations=filesystem:/flyway/sql  migrate
+docker run --rm -v $(pwd)/flyway/sql:/flyway/sql flyway/flyway \
+ -url=jdbc:postgresql://172.17.0.1:5432/tre_kiintmuod \
+ -schemas=public -user=docker -password=docker \
+ -locations=filesystem:/flyway/sql migrate
 ```
 Kantapalvelimen (lokaali kehitysympäristö docker:ssa) osoitteen voi selvittää seuraavasti:
 ```
