@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="474,453" last-zoom="0.85" max-obj-count="33"
+	 default-schema="public" default-owner="postgres">
+<role name="alueraja_user">
+</role>
+
+<database name="dev_alueraja_db" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<extension name="uuid-ossp">
+	<schema name="public"/>
+</extension>
+
+<extension name="postgis">
+	<schema name="public"/>
+</extension>
+
+<schema name="kii_staattinen_tieto" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<schema name="kii_tonttijakosuunnitelma" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<schema name="kii_tonttijako_asiakirja" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<table name="asiakirjalaji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2020" y="860"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+		<comment><![CDATA[Koodin kieli.]]></comment>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Asiakirjalajin koodi.]]></comment>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Asiakirjalajin koodin selite.]]></comment>
+	</column>
+	<constraint name="asiakirjalaji_pk" type="pk-constr" table="kii_staattinen_tieto.asiakirjalaji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tonttijakosuunnitelman_laji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1980" y="320"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Tonttijakosuunnitelman lajin koodi]]></comment>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Tonttijakosuunnitelman lajin koodin selite.]]></comment>
+	</column>
+	<constraint name="tonttijakosuunnitelman_laji_pk" type="pk-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_laji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tonttijakosuunnitelman_elinkaaren_tila" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1940" y="140"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+		<comment><![CDATA[Koodin kieli.]]></comment>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="10"/>
+		<comment><![CDATA[Tonttijakosuunnitelman elinkaaren koodin selite.]]></comment>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Tonttijakosuunnitelman elinkaaren koodi.]]></comment>
+	</column>
+	<constraint name="tonttijakosuunnitelman_elinkaaren_tila_pk" type="pk-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_elinkaaren_tila">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tonttijakosuunnitelma" layer="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="kii_tonttijakosuunnitelma"/>
+	<role name="alueraja_user"/>
+	<position x="280" y="1240"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="tunnus">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="viittaustunnus">
+		<type name="character varying" length="300"/>
+		<comment><![CDATA[URI]]></comment>
+	</column>
+	<column name="luontiaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="muokkausaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="vireilletuloaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="hyvaksymisaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="voimassaoloaika">
+		<type name="tstzrange" length="0"/>
+	</column>
+	<constraint name="tonttijakosuunnitelma_pk" type="pk-constr" table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="9"/>
+		<object name="tonttijakosuunnitelman_laji_id" index="8"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="tonttijakosuunnitelma_uq" index="2"/>
+		<object name="tonttijakosuunnitelma_uq1" index="4"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="3"/>
+		<object name="tonttijakosuunnitelman_laji_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="esitonttikohde" layer="0" collapse-mode="2" max-obj-count="20" z-value="0">
+	<schema name="kii_tonttijakosuunnitelma"/>
+	<role name="alueraja_user"/>
+	<position x="280" y="1640"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="tunnus">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="viittaustunnus">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Sovellusohjeen mukainen arvo (Abstraktiarvo).]]></comment>
+	</column>
+	<column name="luontiaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="muokkausaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="alin_korkeus">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="ylin_korkeus">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="pinta_ala">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="voimassaoloaika">
+		<type name="tstzrange" length="0"/>
+	</column>
+	<column name="geom_0d">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="3878"/>
+	</column>
+	<column name="geom_2d">
+		<type name="geometry" length="0" spatial-type="MULTISURFACE" variation="0" srid="3878"/>
+	</column>
+	<column name="geom_3d">
+		<type name="geometry" length="0" spatial-type="POLYHEDRALSURFACE" variation="0" srid="3878"/>
+	</column>
+	<constraint name="esitonttikohde_pk" type="pk-constr" table="kii_tonttijakosuunnitelma.esitonttikohde">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="esitonttikohteen_laji_id" index="15"/>
+		<object name="suhde_peruskiinteistoon_id" index="14"/>
+		<object name="tonttijakosuunnitelma_id" index="13"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="16"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="esitonttikohde_uq" index="3"/>
+		<object name="esitonttikohde_uq1" index="5"/>
+		<object name="esitonttikohde_uq2" index="7"/>
+		<object name="esitonttikohteen_laji_fk" index="4"/>
+		<object name="suhde_peruskiinteistoon_fk" index="2"/>
+		<object name="tonttijakosuunnitelma_fk" index="1"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="6"/>
+	</customidxs>
+</table>
+
+<table name="asiakirja" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="kii_tonttijako_asiakirja"/>
+	<role name="alueraja_user"/>
+	<position x="260" y="160"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="tunnus">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="viittaustunnus">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="luontiaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="muokkausaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="asiakirja_pk" type="pk-constr" table="kii_tonttijako_asiakirja.asiakirja">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="tonttijakosuunnitelma_id" index="5"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="tonttijakosuunnitelma_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="asiakirja_asiakirjatunnus" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_tonttijako_asiakirja"/>
+	<role name="alueraja_user"/>
+	<position x="940" y="160"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="uri" not-null="true">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="asiakirja_asiakirjatunnus_pk" type="pk-constr" table="kii_tonttijako_asiakirja.asiakirja_asiakirjatunnus">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="asiakirja_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="asiakirja_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="tonttijakosuunnitelman_laatija" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_tonttijakosuunnitelma"/>
+	<role name="alueraja_user"/>
+	<position x="1040" y="1400"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="nimi" not-null="true">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="nimike">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="tonttijakosuunnitelman_laatija_pk" type="pk-constr" table="kii_tonttijakosuunnitelma.tonttijakosuunnitelman_laatija">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="asiakirja_lisatietolinkki" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_tonttijako_asiakirja"/>
+	<role name="alueraja_user"/>
+	<position x="920" y="460"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="uri" not-null="true">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="asiakirja_lisatietolinkki_pk" type="pk-constr" table="kii_tonttijako_asiakirja.asiakirja_lisatietolinkki">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="asiakirja_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="asiakirja_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="asiakirja_metatietolinkki" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_tonttijako_asiakirja"/>
+	<role name="alueraja_user"/>
+	<position x="680" y="660"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="uri" not-null="true">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="asiakirja_metatietolinkki_pk" type="pk-constr" table="kii_tonttijako_asiakirja.asiakirja_metatietolinkki">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="asiakirja_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="asiakirja_fk" index="1"/>
+	</customidxs>
+</table>
+
+<schema name="kii_yhteiset_tiedot" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<relationship name="tonttijakosuunnitelma_has_many_esitonttikohde" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#357eca"
+	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 src-required="true" dst-required="false"
+	del-action="CASCADE"/>
+
+<relationship name="tonttijakosuunnitelma_has_many_asiakirja" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d421ac"
+	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="asiakirja_has_many_asiakirja_asiakirjatunnus" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6e4090"
+	 src-table="kii_tonttijako_asiakirja.asiakirja"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja_asiakirjatunnus"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="asiakirja_has_many_asiakirja_lisatietolinkki" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0749e2"
+	 src-table="kii_tonttijako_asiakirja.asiakirja"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja_lisatietolinkki"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="asiakirja_has_many_asiakirja_metatietolinkki" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5cce31"
+	 src-table="kii_tonttijako_asiakirja.asiakirja"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja_metatietolinkki"
+	 src-required="false" dst-required="false"/>
+
+<table name="suhde_peruskiinteistoon" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1980" y="480"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+		<comment><![CDATA[Koodin kieli.]]></comment>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Suhteen koodi.]]></comment>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Suhteen koodin selite.]]></comment>
+	</column>
+	<constraint name="suhde_peruskiinteistoon_pk" type="pk-constr" table="kii_staattinen_tieto.suhde_peruskiinteistoon">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="esitonttikohteen_laji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2000" y="1040"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Esitonttikohteen lajin koodi.]]></comment>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Esitonttikohteen lajin arvo.]]></comment>
+	</column>
+	<constraint name="esitonttikohteen_laji_pk" type="pk-constr" table="kii_staattinen_tieto.esitonttikohteen_laji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="suhde_peruskiinteistoon_has_one_esitonttikohde" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aa01af"
+	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 dst-table="kii_staattinen_tieto.suhde_peruskiinteistoon"
+	 src-required="false" dst-required="true">
+	<label ref-type="dst-label">
+		<position x="-5.1825" y="1.025"/>
+	</label>
+</relationship>
+
+<relationship name="tonttijakosuunnitelma_has_one_tonttijakosuunnitelman_laji" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#872351"
+	 src-table="kii_staattinen_tieto.tonttijakosuunnitelman_laji"
+	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 src-required="true" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="-7.9675" y="1.025"/>
+	</label>
+</relationship>
+
+<relationship name="esitonttikohde_has_one_tonttijakosuunnitelman_elinkaaren_tila" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b0443b"
+	 src-table="kii_staattinen_tieto.tonttijakosuunnitelman_elinkaaren_tila"
+	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tonttijakosuunnitelma_has_one_tonttijakosuunnitelman_elinkaaren" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#55dae4"
+	 src-table="kii_staattinen_tieto.tonttijakosuunnitelman_elinkaaren_tila"
+	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="esitonttikohteen_laji_has_one_esitonttikohde" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f749c9"
+	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 dst-table="kii_staattinen_tieto.esitonttikohteen_laji"
+	 src-required="false" dst-required="true">
+	<label ref-type="src-label">
+		<position x="-7.9675" y="-4.575"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-3.18187" y="-4.975"/>
+	</label>
+</relationship>
+
+<relationship name="tjs_laatija_tjs_join" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#cdaa30"
+	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelman_laatija"
+	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="tjs_laatija_tjs_join">
+	<label ref-type="src-label">
+		<position x="1.33156" y="3.85"/>
+	</label>
+</relationship>
+
+<relationship name="tonttijakosuunnitelma_versio" type="relnn" layer="0"
+	 src-col-pattern="korvaaja_{sc}" dst-col-pattern="korvattu_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#1d7219"
+	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="tonttijakosuunnitelma_versio">
+	<line>
+		<position x="787.884" y="1349.08"/>
+	<position x="787.884" y="1229"/>
+	<position x="611.256" y="1229"/>
+	</line>
+	<label ref-type="name-label">
+		<position x="82.8876" y="24.85"/>
+	</label>
+</relationship>
+
+<relationship name="asiakirja_versio" type="relnn" layer="0"
+	 src-col-pattern="korvaaja_{sc}" dst-col-pattern="korvattu_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#9cef72"
+	 src-table="kii_tonttijako_asiakirja.asiakirja"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="asiakirja_versio">
+	<line>
+		<position x="657.962" y="238.083"/>
+	<position x="657.962" y="149"/>
+	<position x="517.975" y="149"/>
+	</line>
+</relationship>
+
+<relationship name="esitonttikohde_versio" type="relnn" layer="0"
+	 src-col-pattern="korvaaja_{sc}" dst-col-pattern="korvattu_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#dcb75b"
+	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="esitonttikohde_versio">
+	<line>
+		<position x="917.706" y="1811.08"/>
+	<position x="917.706" y="1629"/>
+	<position x="697.804" y="1629"/>
+	</line>
+</relationship>
+
+<table name="kumoutumistieto" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_tonttijakosuunnitelma"/>
+	<role name="alueraja_user"/>
+	<position x="1120" y="1960"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="kumoutuvan_esitonttikohteen_tunnus">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="kumoutuvan_tonttijakosuunnitelman_tunnus">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="kumoutumistieto_pk" type="pk-constr" table="kii_tonttijakosuunnitelma.kumoutumistieto">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="kii_kiinteisto" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<table name="kiinteistokohde" layer="0" collapse-mode="2" max-obj-count="18" z-value="0">
+	<schema name="kii_kiinteisto"/>
+	<role name="alueraja_user"/>
+	<position x="2720" y="620"/>
+	<column name="id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="tunnus">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="viittaustunnus">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="luontiaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="muokkausaika">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="alin_korkeus">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="ylin_korkeus">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="pinta_ala">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="laji">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovellusohjeen mukaisen lajitaulun alkioon]]></comment>
+	</column>
+	<column name="geom_0d">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="3878"/>
+	</column>
+	<column name="geom_2d">
+		<type name="geometry" length="0" spatial-type="MULTISURFACE" variation="0" srid="3878"/>
+	</column>
+	<column name="geom_3d">
+		<type name="geometry" length="0" spatial-type="POLYHEDRALSURFACE" variation="0" srid="3878"/>
+	</column>
+	<column name="voimassaoloaika">
+		<type name="tstzrange" length="0"/>
+	</column>
+	<constraint name="kiinteistokohde_pk" type="pk-constr" table="kii_kiinteisto.kiinteistokohde">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="suhde_peruskiinteistoon_id" index="13"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="suhde_peruskiinteistoon_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="liittyva_kiinteistokohde" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#0a4fcc"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto.kiinteistokohde"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="liittyva_kiinteistokohde">
+	<line>
+		<position x="3263.27" y="753.883"/>
+	<position x="3263.27" y="609"/>
+	<position x="3074.85" y="609"/>
+	</line>
+	<label ref-type="name-label">
+		<position x="114.417" y="24.85"/>
+	</label>
+</relationship>
+
+<relationship name="kiinteistokohde_versio" type="relnn" layer="0"
+	 src-col-pattern="korvaaja_{sc}" dst-col-pattern="korvattu_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#bab9b6"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto.kiinteistokohde"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="kiinteistokohde_versio">
+	<line>
+		<position x="3295.4" y="786.015"/>
+	<position x="3295.4" y="576.868"/>
+	<position x="3042.71" y="576.868"/>
+	</line>
+	<label ref-type="name-label">
+		<position x="2.10471" y="-5.338"/>
+	</label>
+</relationship>
+
+<table name="lisatieto" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="kii_kiinteisto"/>
+	<role name="alueraja_user"/>
+	<position x="2720" y="1220"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="laji">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Abstraktin kiinteistökohteen laji]]></comment>
+	</column>
+	<constraint name="lisatieto_pk" type="pk-constr" table="kii_kiinteisto.lisatieto">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="muodostustieto" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_yhteiset_tiedot"/>
+	<role name="alueraja_user"/>
+	<position x="2020" y="1600"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="tunnus" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="muodostuspinta_ala" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="muodostustieto_pk" type="pk-constr" table="kii_yhteiset_tiedot.muodostustieto">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="liittyva_esitonttikohde" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#bbdc60"
+	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="liittyva_esitonttikohde">
+	<line>
+		<position x="958.766" y="1852.14"/>
+	<position x="958.766" y="1587.94"/>
+	<position x="656.744" y="1587.94"/>
+	</line>
+	<label ref-type="name-label">
+		<position x="-8.49504" y="5.91"/>
+	</label>
+</relationship>
+
+<relationship name="esitonttikohde_muodostustieto_join" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#676e23"
+	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 dst-table="kii_yhteiset_tiedot.muodostustieto"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="esitonttikohde_muodostustieto_join"/>
+
+<table name="toimitusasian_laatija" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto"/>
+	<role name="alueraja_user"/>
+	<position x="2720" y="1060"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="nimi">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="nimike">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="toimitusasian_laatija_pk" type="pk-constr" table="kii_kiinteisto.toimitusasian_laatija">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="asiakirjalaji_has_many_asiakirja" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fcf68b"
+	 src-table="kii_staattinen_tieto.asiakirjalaji"
+	 dst-table="kii_tonttijako_asiakirja.asiakirja"
+	 src-required="true" dst-required="false"/>
+
+<table name="kohdeyksikko" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2000" y="1260"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="kohdeyksikko_pk" type="pk-constr" table="kii_staattinen_tieto.kohdeyksikko">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="suhde_peruskiinteistoon_has_many_kiinteistokohde" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#be5e05"
+	 src-table="kii_staattinen_tieto.suhde_peruskiinteistoon"
+	 dst-table="kii_kiinteisto.kiinteistokohde"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="kiinteistokohde_muodostustieto_join" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#31278e"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_yhteiset_tiedot.muodostustieto"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="kiinteistokohde_muodostustieto_join"/>
+
+<relationship name="tonttijakosuunnitelma_kumoutumistieto_join" type="relnn" layer="0"
+	 src-col-pattern="{st}_{sc}" dst-col-pattern="{dt}_{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="id"
+	 custom-color="#3a2f1f"
+	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 dst-table="kii_tonttijakosuunnitelma.kumoutumistieto"
+	 src-required="false" dst-required="false"
+	 single-pk-col="true"
+	 table-name="tonttijakosuunnitelma_kumoutumistieto_join"/>
+
+<table name="yleisen_alueen_tyyppi" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2000" y="660"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="yleisen_alueen_tyyppi_pk" type="pk-constr" table="kii_staattinen_tieto.yleisen_alueen_tyyppi">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="kii_kiinteisto_abstraktit_viittaukset" layer="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="alueraja_user"/>
+</schema>
+
+<table name="kiinteistokohde_kiinteistokohteen_tyyppi_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
+	<role name="alueraja_user"/>
+	<position x="2760" y="1400"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="tyyppi">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovellusohjeen mukaisen tyyppitaulun alkioon]]></comment>
+	</column>
+	<constraint name="kiinteistokohde_kiinteistokohteen_tyyppi_abst_join_pk" type="pk-constr" table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_kiinteistokohteen_tyyppi_join">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="kiinteistokohde_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="kiinteistokohde_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="kiinteistokohde_has_many_kiinteistokohde_kiinteistokohteen_tyyp" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#528cdd"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_kiinteistokohteen_tyyppi_join"
+	 src-required="false" dst-required="false"/>
+
+<table name="kiinteistokohde_lisatiedon_laji_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
+	<role name="alueraja_user"/>
+	<position x="2760" y="1560"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="lisatiedon_laji">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovellusohjeen mukaisen lisätiedon laji -taulun alkioon]]></comment>
+	</column>
+	<constraint name="kiinteistokohde_lisatiedon_laji_join_pk" type="pk-constr" table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_lisatiedon_laji_join">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="kiinteistokohde_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="kiinteistokohde_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="kiinteistokohde_has_many_lisatieto_lisatiedon_laji_join" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#c5f071"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_lisatiedon_laji_join"
+	 src-required="false" dst-required="false"/>
+
+<table name="kiinteistokohde_arvo_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
+	<role name="alueraja_user"/>
+	<position x="2760" y="1740"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="arvo">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovellusohjeen mukaisen arvo-taulun alkioon]]></comment>
+	</column>
+	<constraint name="kiinteistokohde_arvo_pk" type="pk-constr" table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_arvo_join">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="kiinteistokohde_id" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="kiinteistokohde_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="kiinteistokohde_kiinteistokohde_arvo_join" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aa3d7a"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_arvo_join"
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="-5.7325" y="-1.775"/>
+	</label>
+</relationship>
+
+<table name="kiinteistokohde_elinkaaren_tila_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
+	<role name="alueraja_user"/>
+	<position x="2760" y="1940"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="elinkaaren_tila">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovellusohjeen mukaisen elinkaaren tila -taulun alkioon]]></comment>
+	</column>
+	<constraint name="kiinteistokohde_elinkaaren_tila_join_pk" type="pk-constr" table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_elinkaaren_tila_join">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="kiinteistokohde_kiinteistokohde_elinkaaren_tila_join" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ec799f"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_elinkaaren_tila_join"
+	 src-required="false" dst-required="false"/>
+
+<table name="kiinteistokohde_kiinteistokohteen_laji_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
+	<role name="alueraja_user"/>
+	<position x="2760" y="2140"/>
+	<column name="id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="laji">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Viittaa sovelluohjeen mukaisen kiinteistokohteen_laji -taulun alkioon]]></comment>
+	</column>
+	<constraint name="kiinteistokohde_kiinteistokohteen_laji_join_pk" type="pk-constr" table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_kiinteistokohteen_laji_join">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="kiinteistokohde_kiinteistokohde_kiinteistokohteen_laji_join" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#cfc93b"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_kiinteisto_abstraktit_viittaukset.kiinteistokohde_kiinteistokohteen_laji_join"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="kohdeyksikko_has_one_kiinteistokohde" type="rel11" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5c67f9"
+	 src-table="kii_kiinteisto.kiinteistokohde"
+	 dst-table="kii_staattinen_tieto.kohdeyksikko"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>
