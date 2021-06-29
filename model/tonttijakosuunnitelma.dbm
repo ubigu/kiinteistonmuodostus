@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="474,453" last-zoom="0.85" max-obj-count="33"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="14,884" last-zoom="0.85" max-obj-count="33"
 	 default-schema="public" default-owner="postgres">
 <role name="alueraja_user">
 </role>
@@ -347,7 +347,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#357eca"
 	 src-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
 	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
-	 src-required="true" dst-required="false"
+	 src-required="false" dst-required="false"
 	del-action="CASCADE"/>
 
 <relationship name="tonttijakosuunnitelma_has_many_asiakirja" type="rel1n" layer="0"
