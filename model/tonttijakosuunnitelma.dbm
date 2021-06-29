@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="814,414" last-zoom="0.85" max-obj-count="33"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="27,1341" last-zoom="0.85" max-obj-count="33"
 	 default-schema="public" default-owner="postgres">
 <role name="alueraja_user">
 </role>
@@ -139,15 +139,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="9"/>
-		<object name="tonttijakosuunnitelman_laji_id" index="8"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="8"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="tonttijakosuunnitelma_uq" index="2"/>
-		<object name="tonttijakosuunnitelma_uq1" index="4"/>
-		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="3"/>
-		<object name="tonttijakosuunnitelman_laji_fk" index="1"/>
+		<object name="tonttijakosuunnitelma_uq" index="1"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="2"/>
 	</customidxs>
 </table>
 
@@ -200,20 +197,17 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="esitonttikohteen_laji_id" index="15"/>
-		<object name="suhde_peruskiinteistoon_id" index="14"/>
+		<object name="esitonttikohteen_laji_id" index="14"/>
 		<object name="tonttijakosuunnitelma_id" index="13"/>
-		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="16"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_id" index="15"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="esitonttikohde_uq" index="3"/>
-		<object name="esitonttikohde_uq1" index="5"/>
-		<object name="esitonttikohde_uq2" index="7"/>
-		<object name="esitonttikohteen_laji_fk" index="4"/>
-		<object name="suhde_peruskiinteistoon_fk" index="2"/>
+		<object name="esitonttikohde_uq" index="2"/>
+		<object name="esitonttikohde_uq1" index="4"/>
+		<object name="esitonttikohteen_laji_fk" index="3"/>
 		<object name="tonttijakosuunnitelma_fk" index="1"/>
-		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="6"/>
+		<object name="tonttijakosuunnitelman_elinkaaren_tila_fk" index="5"/>
 	</customidxs>
 </table>
 
@@ -433,32 +427,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<relationship name="suhde_peruskiinteistoon_has_one_esitonttikohde" type="rel11" layer="0"
-	 src-col-pattern="{st}_{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#aa01af"
-	 src-table="kii_tonttijakosuunnitelma.esitonttikohde"
-	 dst-table="kii_staattinen_tieto.suhde_peruskiinteistoon"
-	 src-required="false" dst-required="true">
-	<label ref-type="dst-label">
-		<position x="-5.1825" y="1.025"/>
-	</label>
-</relationship>
-
-<relationship name="tonttijakosuunnitelma_has_one_tonttijakosuunnitelman_laji" type="rel11" layer="0"
-	 src-col-pattern="{st}_{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#872351"
-	 src-table="kii_staattinen_tieto.tonttijakosuunnitelman_laji"
-	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
-	 src-required="true" dst-required="false">
-	<label ref-type="dst-label">
-		<position x="-7.9675" y="1.025"/>
-	</label>
-</relationship>
-
 <relationship name="esitonttikohde_has_one_tonttijakosuunnitelman_elinkaaren_tila" type="rel11" layer="0"
 	 src-col-pattern="{st}_{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
@@ -521,7 +489,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 single-pk-col="true"
 	 table-name="tonttijakosuunnitelma_versio">
 	<line>
-		<position x="787.884" y="1349.08"/>
+		<position x="787.884" y="1342.88"/>
 	<position x="787.884" y="1229"/>
 	<position x="611.256" y="1229"/>
 	</line>
@@ -560,7 +528,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 single-pk-col="true"
 	 table-name="esitonttikohde_versio">
 	<line>
-		<position x="917.706" y="1811.08"/>
+		<position x="917.706" y="1804.88"/>
 	<position x="917.706" y="1629"/>
 	<position x="697.804" y="1629"/>
 	</line>
@@ -733,9 +701,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 single-pk-col="true"
 	 table-name="liittyva_esitonttikohde">
 	<line>
-		<position x="958.766" y="1852.14"/>
-	<position x="958.766" y="1587.94"/>
-	<position x="656.744" y="1587.94"/>
+		<position x="957.278" y="1844.46"/>
+	<position x="957.278" y="1589.43"/>
+	<position x="658.232" y="1589.43"/>
 	</line>
 	<label ref-type="name-label">
 		<position x="-8.49504" y="5.91"/>
@@ -1021,5 +989,23 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="kii_kiinteisto.kiinteistokohde"
 	 dst-table="kii_staattinen_tieto.kohdeyksikko"
 	 src-required="false" dst-required="true"/>
+
+<relationship name="tonttijakosuunnitelman_laji_has_many_tonttijakosuunnitelma" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#405c6d"
+	 src-table="kii_staattinen_tieto.tonttijakosuunnitelman_laji"
+	 dst-table="kii_tonttijakosuunnitelma.tonttijakosuunnitelma"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="suhde_peruskiinteistoon_has_many_esitonttikohde" type="rel1n" layer="0"
+	 src-col-pattern="{st}_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8c00c7"
+	 src-table="kii_staattinen_tieto.suhde_peruskiinteistoon"
+	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
+	 src-required="false" dst-required="false"/>
 
 </dbmodel>
