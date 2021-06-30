@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="155,1245" last-zoom="0.85" max-obj-count="33"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="998,0" last-zoom="0.85" max-obj-count="39"
 	 default-schema="public" default-owner="postgres">
 <role name="alueraja_user">
 </role>
@@ -37,7 +37,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="asiakirjalaji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="2020" y="860"/>
+	<position x="2300" y="320"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -56,12 +56,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="asiakirjalaji_pk" type="pk-constr" table="kii_staattinen_tieto.asiakirjalaji">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="asiakirjalaji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.asiakirjalaji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="tonttijakosuunnitelman_laji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="1980" y="320"/>
+	<position x="1720" y="300"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -79,12 +82,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="tonttijakosuunnitelman_laji_pk" type="pk-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_laji">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="tonttijakosuunnitelman_laji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_laji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="tonttijakosuunnitelman_elinkaaren_tila" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="1940" y="140"/>
+	<position x="1720" y="120"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -102,6 +108,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="tonttijakosuunnitelman_elinkaaren_tila_pk" type="pk-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_elinkaaren_tila">
 		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="tonttijakosuunnitelman_elinkaaren_tila_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.tonttijakosuunnitelman_elinkaaren_tila">
+		<columns names="lang,koodi" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -382,7 +391,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="suhde_peruskiinteistoon" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="1980" y="480"/>
+	<position x="1720" y="480"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -401,12 +410,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="suhde_peruskiinteistoon_pk" type="pk-constr" table="kii_staattinen_tieto.suhde_peruskiinteistoon">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="suhde_peruskiinteistoon_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.suhde_peruskiinteistoon">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="esitonttikohteen_laji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="2000" y="1040"/>
+	<position x="1720" y="860"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -423,6 +435,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="esitonttikohteen_laji_pk" type="pk-constr" table="kii_staattinen_tieto.esitonttikohteen_laji">
 		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="esitonttikohteen_laji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.esitonttikohteen_laji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -542,7 +557,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde" layer="0" collapse-mode="2" max-obj-count="18" z-value="0">
 	<schema name="kii_kiinteisto"/>
 	<role name="alueraja_user"/>
-	<position x="2720" y="620"/>
+	<position x="2820" y="620"/>
 	<column name="id" not-null="true" default-value="uuid_generate_v4()">
 		<type name="uuid" length="0"/>
 	</column>
@@ -608,9 +623,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 single-pk-col="true"
 	 table-name="liittyva_kiinteistokohde">
 	<line>
-		<position x="3263.27" y="753.883"/>
-	<position x="3263.27" y="609"/>
-	<position x="3074.85" y="609"/>
+		<position x="3363.27" y="753.883"/>
+	<position x="3363.27" y="609"/>
+	<position x="3174.85" y="609"/>
 	</line>
 	<label ref-type="name-label">
 		<position x="114.417" y="24.85"/>
@@ -629,9 +644,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 single-pk-col="true"
 	 table-name="kiinteistokohde_versio">
 	<line>
-		<position x="3295.4" y="786.015"/>
-	<position x="3295.4" y="576.868"/>
-	<position x="3042.71" y="576.868"/>
+		<position x="3395.4" y="786.015"/>
+	<position x="3395.4" y="576.868"/>
+	<position x="3142.71" y="576.868"/>
 	</line>
 	<label ref-type="name-label">
 		<position x="2.10471" y="-5.338"/>
@@ -641,7 +656,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="lisatieto" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
 	<schema name="kii_kiinteisto"/>
 	<role name="alueraja_user"/>
-	<position x="2720" y="1220"/>
+	<position x="2820" y="1220"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -657,7 +672,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="muodostustieto" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_yhteiset_tiedot"/>
 	<role name="alueraja_user"/>
-	<position x="2020" y="1600"/>
+	<position x="1840" y="2420"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -708,7 +723,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="toimitusasian_laatija" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto"/>
 	<role name="alueraja_user"/>
-	<position x="2720" y="1060"/>
+	<position x="2820" y="1060"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -735,7 +750,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kohdeyksikko" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="2000" y="1260"/>
+	<position x="2280" y="120"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -750,6 +765,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="kohdeyksikko_pk" type="pk-constr" table="kii_staattinen_tieto.kohdeyksikko">
 		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="kohdeyksikko_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.kohdeyksikko">
+		<columns names="lang,koodi" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -789,7 +807,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="yleisen_alueen_tyyppi" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="kii_staattinen_tieto"/>
 	<role name="alueraja_user"/>
-	<position x="2000" y="660"/>
+	<position x="1720" y="660"/>
 	<column name="id" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -805,6 +823,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="yleisen_alueen_tyyppi_pk" type="pk-constr" table="kii_staattinen_tieto.yleisen_alueen_tyyppi">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="yleisen_alueen_tyyppi_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.yleisen_alueen_tyyppi">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <schema name="kii_kiinteisto_abstraktit_viittaukset" layer="0" rect-visible="true" fill-color="#e1e1e1">
@@ -814,7 +835,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde_kiinteistokohteen_tyyppi_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
 	<role name="alueraja_user"/>
-	<position x="2760" y="1400"/>
+	<position x="2900" y="1440"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -847,7 +868,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde_lisatiedon_laji_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
 	<role name="alueraja_user"/>
-	<position x="2760" y="1560"/>
+	<position x="2900" y="1600"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -880,7 +901,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde_arvo_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
 	<role name="alueraja_user"/>
-	<position x="2760" y="1740"/>
+	<position x="2900" y="1780"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -917,7 +938,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde_elinkaaren_tila_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
 	<role name="alueraja_user"/>
-	<position x="2760" y="1940"/>
+	<position x="2900" y="1980"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -942,7 +963,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="kiinteistokohde_kiinteistokohteen_laji_join" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="kii_kiinteisto_abstraktit_viittaukset"/>
 	<role name="alueraja_user"/>
-	<position x="2760" y="2140"/>
+	<position x="2900" y="2180"/>
 	<column name="id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -999,5 +1020,221 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="kii_staattinen_tieto.esitonttikohteen_laji"
 	 dst-table="kii_tonttijakosuunnitelma.esitonttikohde"
 	 src-required="true" dst-required="false"/>
+
+<table name="rajamerkin_alusta" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1720" y="1060"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rajamerkin_alusta_pk" type="pk-constr" table="kii_staattinen_tieto.rajamerkin_alusta">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rajamerkin_alusta_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rajamerkin_alusta">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rajamerkin_nakyvyys" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1720" y="1260"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rajamerkin_nakyvyys_pk" type="pk-constr" table="kii_staattinen_tieto.rajamerkin_nakyvyys">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rajamerkin_nakyvyys_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rajamerkin_nakyvyys">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rajamerkin_rakenne" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2180" y="1260"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rajamerkin_rakenne_pk" type="pk-constr" table="kii_staattinen_tieto.rajamerkin_rakenne">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rajamerkin_rakenne_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rajamerkin_rakenne">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rajamerkkilaji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2220" y="1460"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rajamerkkilaji_pk" type="pk-constr" table="kii_staattinen_tieto.rajamerkkilaji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rajamerkkilaji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rajamerkkilaji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rajamerkin_elinkaaren_tila" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1720" y="1460"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rajamerkin_elinkaaren_tila_pk" type="pk-constr" table="kii_staattinen_tieto.rajamerkin_elinkaaren_tila">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rajamerkin_elinkaaren_tila_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rajamerkin_elinkaaren_tila">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rekisteriyksikkolaji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2260" y="1660"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="character varying" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rekisteriyksikkolaji_pk" type="pk-constr" table="kii_staattinen_tieto.rekisteriyksikkolaji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rekisteriyksikkolaji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rekisteriyksikkolaji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rekisteriyksikon_elinkaaren_tila" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1720" y="1660"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="rekisteriyksikon_elinkaaren_tila_pk" type="pk-constr" table="kii_staattinen_tieto.rekisteriyksikon_elinkaaren_tila">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rekisteriyksikon_elinkaaren_tila_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.rekisteriyksikon_elinkaaren_tila">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="kayttooikeusyksikkolaji" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="2220" y="1880"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="kayttooikeusyksikkolaji_pk" type="pk-constr" table="kii_staattinen_tieto.kayttooikeusyksikkolaji">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="kayttooikeusyksikkolaji_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.kayttooikeusyksikkolaji">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="maaraalan_elinkaaren_tila" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="kii_staattinen_tieto"/>
+	<role name="alueraja_user"/>
+	<position x="1720" y="1880"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="lang" default-value="'FI'">
+		<type name="char" length="2"/>
+	</column>
+	<column name="koodi">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="arvo">
+		<type name="character varying" length="200"/>
+	</column>
+	<constraint name="maaraalan_elinkaaren_tila_pk" type="pk-constr" table="kii_staattinen_tieto.maaraalan_elinkaaren_tila">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="maaraalan_elinkaaren_tila_koodi_lang_uq" type="uq-constr" table="kii_staattinen_tieto.maaraalan_elinkaaren_tila">
+		<columns names="lang,koodi" ref-type="src-columns"/>
+	</constraint>
+</table>
 
 </dbmodel>
