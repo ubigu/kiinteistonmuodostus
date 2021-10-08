@@ -36,20 +36,15 @@ tarpeettomat muutokset.
 
 Suodattimien käyttöesimerkki:
 ```sh
-$ cat database_export.sql | ./filter_role.sh
+[shell]$ cat database_export.sql | ./filter_role.sh
 ```
 
 Todenna suodattimen toiminta manuaalisella tarkastelulla vaikka näin:
 ```sh
-$ cat database_export.sql | ./filter_role.sh | diff database_export.sql -
+[shell]$ cat database_export.sql | ./filter_role.sh | diff database_export.sql -
 ```
 
 # Tietokantapalvelun käynnistäminen
-
-Ensimmäisellä kerralla käynnistettäessä aja build:
-```
-[shell]$ docker-compose build schema_image
-```
 
 Palvelu (PostgreSQL 12, PostGIS 3) käynnistetään docker-compose -komennolla:
 
@@ -57,7 +52,7 @@ Palvelu (PostgreSQL 12, PostGIS 3) käynnistetään docker-compose -komennolla:
 [shell]$ docker-compose up
 ```
 
-Palvelu käynnistyy porttiin 5432.
+PostgreSQL käynnistyy porttiin 5432.
 
 Komentorivipääsy tietokantaan onnistuu seuraavasti:
 
