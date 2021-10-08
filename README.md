@@ -1,5 +1,6 @@
-# Kiinteistonmuodostus
-Kiinteistönmuodostuksen ja tonttijaon tietomallit
+# Kiinteistön ja tonttijaon tietomallit
+
+Kiinteistön ja tonttijaon tietomallien kantatason toteutus.
 
 ## Tietomallin kuvaus
 
@@ -9,7 +10,7 @@ Tietomalli pyrkii mukailemaan kansallista tietomallia.
 
 [Tietomalli](logical_model/tonttijaon_looginen_tietomalli_30082021.png) liitteenä
 
-### Kiinteistönmuodostuksen looginen tietomalli
+### Kiinteistön looginen tietomalli
 
 [Tietomalli](logical_model/kiinteiston_looginen_tietomalli_v0.2_30082021.png) liitteenä
 
@@ -37,12 +38,15 @@ Inkrementaalisten päivitysten mahdollistamiseksi filters-hakemistoon
 on lisätty joitain käyttöä ja tulevaa automatisointia helpottavia
 suodattimia.
 
-Suodattimien tarkoitus on poistaa tuotetusta sql-tallenteesta
-tarpeettomia päivityksiä, joita työkalusta itsestään ei voi kytkeä
-pois. Näitä ovat esimerkiksi roolin (ROLE) tai laajennuksen (EXTENSION)
-tarpeettomat muutokset.
+Suodattimien tarkoitus on poistaa tuotetusta pgModelerilla tuotetusta
+SQL-tallenteesta tarpeettomia toimenpiteitä, joita työkalusta
+itsestään ei voi kytkeä pois. Näitä ovat esimerkiksi roolin (ROLE) tai
+laajennuksen (EXTENSION) tarpeettomat muutokset.
 
-Suodattimien käyttöesimerkki:
+On huomattava, että suodattimien toiminta on vahvasti riippuvainen pgModeler:n tuottamasta
+SQL-kielestä, ja on todennäköistä että suodattimia pitää myöhemmin päivittää.
+
+Suodattimien käyttöesimerkki, turhien roolien poistaminen tallenteesta:
 ```sh
 [shell]$ cat database_export.sql | ./filter_role.sh
 ```
