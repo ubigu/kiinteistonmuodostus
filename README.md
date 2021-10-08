@@ -44,7 +44,7 @@ itsestään ei voi kytkeä pois. Näitä ovat esimerkiksi roolin (ROLE) tai
 laajennuksen (EXTENSION) tarpeettomat muutokset.
 
 On huomattava, että suodattimien toiminta on vahvasti riippuvainen pgModeler:n tuottamasta
-SQL-kielestä, ja on todennäköistä että suodattimia pitää myöhemmin päivittää.
+SQL-tulosteen rakenteesta, ja on todennäköistä että suodattimia pitää myöhemmin päivittää.
 
 Suodattimien käyttöesimerkki, turhien roolien poistaminen tallenteesta:
 ```sh
@@ -56,7 +56,7 @@ Todenna suodattimen toiminta manuaalisella tarkastelulla vaikka näin:
 [shell]$ cat database_export.sql | ./filter_role.sh | diff database_export.sql -
 ```
 
-# Tietokantapalvelun käynnistäminen
+## Tietokantapalvelun käynnistäminen
 
 Palvelu (PostgreSQL 12, PostGIS 3) käynnistetään docker-compose -komennolla:
 
