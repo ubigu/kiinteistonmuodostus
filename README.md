@@ -5,6 +5,14 @@ Kiinteistönmuodostuksen ja tonttijaon tietomallit
 
 Tietomalli pyrkii mukailemaan kansallista tietomallia.
 
+### Tonttijaon looginen tietomalli
+
+[Tietomalli](logical_model/tonttijaon_looginen_tietomalli_30082021.png) liitteenä
+
+### Kiinteistönmuodostuksen looginen tietomalli
+
+[Tietomalli](logical_model/kiinteiston_looginen_tietomalli_v0.2_30082021.png) liitteenä
+
 ## Tietomallin ohjelmistovaatimukset
 
 Tietomalli on suunniteltu käyttäen [pgModeler](https://pgmodeler.io/)
