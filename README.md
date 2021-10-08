@@ -1,5 +1,40 @@
-# kiinteistonmuodostus
-Kiinteistönmuodostuksen tietomallit
+# Kiinteistonmuodostus
+Kiinteistönmuodostuksen ja tonttijaon tietomallit
+
+## Tietomallin kuvaus
+
+Tietomalli pyrkii mukailemaan kansallista tietomallia.
+
+## Tietomallin ohjelmistovaatimukset
+
+Tietomalli on suunniteltu käyttäen pgModeler -suunnitteluohjelmaa.
+[pgModeler](https://pgmodeler.io/)
+
+## Tietomallin käyttöönotto
+
+Avaa tietomalli pgModeler:lla.
+Käytä Export -toimintoa viedäksesi tietomalli PostgreSQL-kantaan.
+
+### Havaintoja inkrementaalisesta päivityksestä
+
+Inkrementaalisen päivityksen tähän asti havaittuja ongelmia on
+dokumentoitu [raportissa](pgmodeler_tyokaluna.md).
+
+## Päivitystyötä tukevat suodattimet
+
+Inkrementaalisten päivitysten mahdollistamiseksi filters-hakemistoon
+on lisätty joitain käyttöä ja tulevaa automatisointia helpottavia
+suodattimia.
+
+Suodattimien tarkoitus on poistaa tuotetusta sql-tallenteesta
+tarpeettomia päivityksiä, joita työkalusta itsestään ei voi kytkeä
+pois. Näitä ovat esimerkiksi roolin (ROLE) tai laajennuksen (EXTENSION)
+tarpeettomat muutokset.
+
+Suodattimien käyttöesimerkki:
+```sh
+$ cat database_export.sql | ./filter_role.sh
+```
 
 # Tietokantapalvelun käynnistäminen
 
