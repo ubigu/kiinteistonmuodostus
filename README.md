@@ -7,20 +7,23 @@ Tietomalli pyrkii mukailemaan kansallista tietomallia.
 
 ## Tietomallin ohjelmistovaatimukset
 
-Tietomalli on suunniteltu käyttäen pgModeler -suunnitteluohjelmaa.
-[pgModeler](https://pgmodeler.io/)
+Tietomalli on suunniteltu käyttäen [pgModeler](https://pgmodeler.io/)
+-suunnitteluohjelmaa.
+
+Käytetty pgModeler:n versio on 0.9.3. Mallia on hyödynnetty
+PostgreSQL versiolla 12 ja PostGIS versiolla 3.0.
 
 ## Tietomallin käyttöönotto
 
-Avaa tietomalli pgModeler:lla.
-Käytä Export -toimintoa viedäksesi tietomalli PostgreSQL-kantaan.
+* Avaa tietomalli pgModeler:lla.
+* Käytä Export -toimintoa viedäksesi tietomalli PostgreSQL-kantaan.
 
-### Havaintoja inkrementaalisesta päivityksestä
+## Havaintoja inkrementaalisesta päivityksestä
 
 Inkrementaalisen päivityksen tähän asti havaittuja ongelmia on
 dokumentoitu [raportissa](pgmodeler_tyokaluna.md).
 
-## Päivitystyötä tukevat suodattimet
+### Päivitystyötä tukevat suodattimet
 
 Inkrementaalisten päivitysten mahdollistamiseksi filters-hakemistoon
 on lisätty joitain käyttöä ja tulevaa automatisointia helpottavia
@@ -34,6 +37,11 @@ tarpeettomat muutokset.
 Suodattimien käyttöesimerkki:
 ```sh
 $ cat database_export.sql | ./filter_role.sh
+```
+
+Todenna suodattimen toiminta manuaalisella tarkastelulla vaikka näin:
+```sh
+$ cat database_export.sql | ./filter_role.sh | diff database_export.sql -
 ```
 
 # Tietokantapalvelun käynnistäminen

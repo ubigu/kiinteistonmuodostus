@@ -1,1 +1,0 @@
-DROP TABLE test_flyway2_1;
